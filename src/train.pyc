@@ -1,0 +1,44 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score, classification_report
+import joblib
+import os
+
+# load dataset
+data_path = "../dataset/ids.csv"
+data = pd.read_csv(data_path)
+
+print("Data loaded:", data.shape)
+
+# encode categorical columns if any
+for col in data.columns:
+    if data[col].dtype == 'object':
+        data[col] = LabelEncoder().fit_transform(data[col])
+
+# split features and label
+X = data.iloc[:, :-1]
+y = data.iloc[:, -1]
+
+# train/test split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# model
+model = DecisionTreeClassifier()
+model.fit(X_train, y_train)
+
+# prediction
+y_pred = model.predict(X_test)
+
+# evaluation
+print("\nAccuracy:", accuracy_score(y_test, y_pred))
+print("\nReport:\n", classification_report(y_test, y_pred))
+
+# save model
+os.makedirs("../models", exist_ok=True)
+joblib.dump(model, "../models/ids_model.pkl")
+
+print("\nModel saved successfully!")
