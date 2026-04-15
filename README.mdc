@@ -1,0 +1,22 @@
+# AI Intrusion Detection System 🛡️
+
+## Description
+AI-powered Intrusion Detection System (IDS) using Machine Learning - Built with Python
+
+## Features
+- 🚨 Real-time intrusion detection
+- ✅ Safe traffic monitoring
+- 🤖 Machine Learning based detection
+- 📊 Dataset-based analysis
+
+## Technologies Used
+- Python
+- Scikit-learn
+- Pandas
+- NumPy
+
+## How to Run
+python main.py
+
+## Author
+AbdullahNabil1
